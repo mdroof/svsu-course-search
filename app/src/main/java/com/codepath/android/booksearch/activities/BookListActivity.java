@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 
 import com.codepath.android.booksearch.R;
 import com.codepath.android.booksearch.adapters.BookAdapter;
-import com.codepath.android.booksearch.models.Book;
+import com.codepath.android.booksearch.models.Course;
 import com.codepath.android.booksearch.net.BookClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -38,9 +38,9 @@ public class BookListActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
         lvBooks = (ListView) findViewById(R.id.lvBooks);
-        ArrayList<Book> aBooks = new ArrayList<Book>();
+        ArrayList<Course> aCourses = new ArrayList<Course>();
         // initialize the adapter
-        bookAdapter = new BookAdapter(this, aBooks);
+        bookAdapter = new BookAdapter(this, aCourses);
         // attach the adapter to the ListView
         lvBooks.setAdapter(bookAdapter);
         progress = (ProgressBar) findViewById(R.id.progress);
@@ -76,12 +76,12 @@ public class BookListActivity extends ActionBarActivity {
                         // Get the docs json array
                         docs = response.getJSONArray("docs");
                         // Parse json array into array of model objects
-                        final ArrayList<Book> books = Book.fromJson(docs);
+                        final ArrayList<Course> courses = Course.fromJson(docs);
                         // Remove all books from the adapter
                         bookAdapter.clear();
                         // Load model objects into the adapter
-                        for (Book book : books) {
-                            bookAdapter.add(book); // add book through the adapter
+                        for (Course course : courses) {
+                            bookAdapter.add(course); // add book through the adapter
                         }
                         bookAdapter.notifyDataSetChanged();
                     }

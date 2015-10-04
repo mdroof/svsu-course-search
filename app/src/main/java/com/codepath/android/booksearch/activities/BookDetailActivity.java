@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.android.booksearch.R;
-import com.codepath.android.booksearch.models.Book;
+import com.codepath.android.booksearch.models.Course;
 import com.codepath.android.booksearch.net.BookClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
@@ -48,21 +48,21 @@ public class BookDetailActivity extends ActionBarActivity {
         tvPublisher = (TextView) findViewById(R.id.tvPublisher);
         tvPageCount = (TextView) findViewById(R.id.tvPageCount);
         // Use the book to populate the data into our views
-        Book book = (Book) getIntent().getSerializableExtra(BookListActivity.BOOK_DETAIL_KEY);
-        loadBook(book);
+        Course course = (Course) getIntent().getSerializableExtra(BookListActivity.BOOK_DETAIL_KEY);
+        loadBook(course);
     }
 
     // Populate data for the book
-    private void loadBook(Book book) {
+    private void loadBook(Course course) {
         //change activity title
-        this.setTitle(book.getTitle());
+        this.setTitle(course.getTitle());
         // Populate data
-        Picasso.with(this).load(Uri.parse(book.getLargeCoverUrl())).error(R.drawable.ic_nocover).into(ivBookCover);
-        tvTitle.setText(book.getTitle());
-        tvAuthor.setText(book.getAuthor());
+        //Picasso.with(this).load(Uri.parse(course.getLargeCoverUrl())).error(R.drawable.ic_nocover).into(ivBookCover);
+        tvTitle.setText(course.getTitle());
+        tvAuthor.setText(course.getAuthor());
         // fetch extra book data from books API
         client = new BookClient();
-        client.getExtraBookDetails(book.getOpenLibraryId(), new JsonHttpResponseHandler() {
+        client.getExtraBookDetails(course.getOpenLibraryId(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
