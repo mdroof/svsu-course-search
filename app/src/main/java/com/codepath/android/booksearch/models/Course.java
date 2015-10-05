@@ -29,6 +29,7 @@ public class Course implements Serializable {
     private String status;
     private String term;
     private String title;
+    private String instructor;
 
 
     public String getOpenLibraryId() {
@@ -41,6 +42,18 @@ public class Course implements Serializable {
 
     public String getAuthor() {
         return author;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public String getCourseNumber() {
+        return courseNumber;
+    }
+
+    public String getInstructor(){
+        return instructor;
     }
 
     // Get medium sized book cover from covers API
@@ -86,6 +99,18 @@ public class Course implements Serializable {
             if(jsonObject.has("status")){
                 course.status = jsonObject.getString("status");
             }
+            if(jsonObject.has("title")){
+                course.title = jsonObject.getString("title");
+            }
+            if(jsonObject.has("title")){
+                course.title = jsonObject.getString("title");
+            }
+            if(jsonObject.has("instructors")){
+                JSONArray docs = jsonObject.getJSONArray("instructors");
+                JSONObject courseJson = docs.getJSONObject(0);
+                course.instructor = courseJson.getString("name");
+            }
+
 
             /*
             if (jsonObject.has("cover_edition_key")) {

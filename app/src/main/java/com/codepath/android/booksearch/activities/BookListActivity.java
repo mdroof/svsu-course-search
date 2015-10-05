@@ -74,7 +74,7 @@ public class BookListActivity extends ActionBarActivity {
                     JSONArray docs = null;
                     if(response != null) {
                         // Get the docs json array
-                        docs = response.getJSONArray("docs");
+                        docs = response.getJSONArray("courses");
                         // Parse json array into array of model objects
                         final ArrayList<Course> courses = Course.fromJson(docs);
                         // Remove all books from the adapter
