@@ -76,6 +76,7 @@ public class BookDetailActivity extends ActionBarActivity {
                         }
                         tvPublisher.setText(TextUtils.join(", ", publishers));
                     }
+                    //tvPublisher.setText(course.getDays() + " " + course.getStartTime() + "-" + course.getEndTime());
                     if (response.has("number_of_pages")) {
                         tvPageCount.setText(Integer.toString(response.getInt("number_of_pages")) + " pages");
                     }

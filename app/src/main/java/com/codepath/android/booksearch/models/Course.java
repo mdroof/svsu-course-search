@@ -30,6 +30,9 @@ public class Course implements Serializable {
     private String term;
     private String title;
     private String instructor;
+    private String days;
+    private String startTime;
+    private String endTime;
 
 
     public String getOpenLibraryId() {
@@ -54,6 +57,20 @@ public class Course implements Serializable {
 
     public String getInstructor(){
         return instructor;
+    }
+
+    public String getSection(){
+        return section;
+    }
+
+    public String getDays(){
+        return days;
+    }
+    public String getStartTime(){
+        return startTime;
+    }
+    public String getEndTime(){
+        return endTime;
     }
 
     // Get medium sized book cover from covers API
@@ -102,8 +119,17 @@ public class Course implements Serializable {
             if(jsonObject.has("title")){
                 course.title = jsonObject.getString("title");
             }
-            if(jsonObject.has("title")){
-                course.title = jsonObject.getString("title");
+            if(jsonObject.has("section")){
+                course.section = jsonObject.getString("section");
+            }
+            if(jsonObject.has("days")){
+                course.days = jsonObject.getString("days");
+            }
+            if(jsonObject.has("startTime")){
+                course.startTime = jsonObject.getString("startTime");
+            }
+            if(jsonObject.has("endTime")){
+                course.endTime = jsonObject.getString("endTime");
             }
             if(jsonObject.has("instructors")){
                 JSONArray docs = jsonObject.getJSONArray("instructors");

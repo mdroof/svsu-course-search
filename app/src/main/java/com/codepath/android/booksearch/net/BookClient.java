@@ -23,7 +23,7 @@ public class BookClient {
     public void getBooks(final String query, JsonHttpResponseHandler handler) {
         try {
             //String url = getApiUrl("search.json?q=");
-            String url = getApiUrl("courses?description=");
+            String url = getApiUrl("courses?courseNumber=");
             client.get(url + URLEncoder.encode(query, "utf-8"), handler);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
