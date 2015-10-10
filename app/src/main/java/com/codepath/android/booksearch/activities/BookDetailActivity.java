@@ -2,6 +2,7 @@ package com.codepath.android.booksearch.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -35,6 +36,9 @@ public class BookDetailActivity extends ActionBarActivity {
     private TextView tvAuthor;
     private TextView tvPublisher;
     private TextView tvPageCount;
+    private TextView tvDescription;
+    private TextView tvMeetingTime;
+
     private BookClient client;
 
     @Override
@@ -47,6 +51,8 @@ public class BookDetailActivity extends ActionBarActivity {
         tvAuthor = (TextView) findViewById(R.id.tvAuthor);
         tvPublisher = (TextView) findViewById(R.id.tvPublisher);
         tvPageCount = (TextView) findViewById(R.id.tvPageCount);
+        tvDescription = (TextView) findViewById(R.id.tvDescription);
+        tvMeetingTime = (TextView) findViewById(R.id.tvMeetingTime);
         // Use the book to populate the data into our views
         Course course = (Course) getIntent().getSerializableExtra(BookListActivity.BOOK_DETAIL_KEY);
         loadBook(course);
@@ -60,6 +66,16 @@ public class BookDetailActivity extends ActionBarActivity {
         //Picasso.with(this).load(Uri.parse(course.getLargeCoverUrl())).error(R.drawable.ic_nocover).into(ivBookCover);
         tvTitle.setText(course.getTitle());
         tvAuthor.setText(course.getInstructor());
+        tvDescription.setText(course.getDescription());
+        tvMeetingTime.setText("Meeting Time: " + course.getDays() + " " + course.getStartTime() + " - " + course.getEndTime());
+        if(course.getStatus().equals("Open") == true){
+            tvPublisher.setTextColor(Color.parseColor("#00FF00"));
+        }else if(course.getStatus().equals("Open") == false){
+            tvPublisher.setTextColor(Color.parseColor("#FF0000"));
+        }
+        tvPageCount.setText("Seats Available: " + course.getSeatsAvailable());
+        tvPublisher.setText("Status: " + course.getStatus());
+
         // fetch extra book data from books API
         client = new BookClient();
         client.getExtraBookDetails(course.getOpenLibraryId(), new JsonHttpResponseHandler() {
@@ -76,7 +92,7 @@ public class BookDetailActivity extends ActionBarActivity {
                         }
                         tvPublisher.setText(TextUtils.join(", ", publishers));
                     }
-                    //tvPublisher.setText(course.getDays() + " " + course.getStartTime() + "-" + course.getEndTime());
+
                     if (response.has("number_of_pages")) {
                         tvPageCount.setText(Integer.toString(response.getInt("number_of_pages")) + " pages");
                     }

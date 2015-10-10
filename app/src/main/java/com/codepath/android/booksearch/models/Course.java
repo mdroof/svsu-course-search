@@ -1,6 +1,7 @@
 package com.codepath.android.booksearch.models;
 
 import android.text.TextUtils;
+import android.util.EventLogTags;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,19 +51,15 @@ public class Course implements Serializable {
     public String getPrefix() {
         return prefix;
     }
-
     public String getCourseNumber() {
         return courseNumber;
     }
-
     public String getInstructor(){
         return instructor;
     }
-
     public String getSection(){
         return section;
     }
-
     public String getDays(){
         return days;
     }
@@ -71,6 +68,15 @@ public class Course implements Serializable {
     }
     public String getEndTime(){
         return endTime;
+    }
+    public String getDescription(){
+        return description;
+    }
+    public String getStatus(){
+        return status;
+    }
+    public String getSeatsAvailable(){
+        return seatsAvailable;
     }
 
     // Get medium sized book cover from covers API
@@ -122,19 +128,23 @@ public class Course implements Serializable {
             if(jsonObject.has("section")){
                 course.section = jsonObject.getString("section");
             }
-            if(jsonObject.has("days")){
-                course.days = jsonObject.getString("days");
-            }
-            if(jsonObject.has("startTime")){
-                course.startTime = jsonObject.getString("startTime");
-            }
-            if(jsonObject.has("endTime")){
-                course.endTime = jsonObject.getString("endTime");
+            if(jsonObject.has("meetingTimes")){
+                JSONArray docs = jsonObject.getJSONArray("meetingTimes");
+                JSONObject courseJson = docs.getJSONObject(0);
+                course.days = courseJson.getString("days");
+                course.startTime = courseJson.getString("startTime");
+                course.endTime = courseJson.getString("endTime");
             }
             if(jsonObject.has("instructors")){
                 JSONArray docs = jsonObject.getJSONArray("instructors");
                 JSONObject courseJson = docs.getJSONObject(0);
                 course.instructor = courseJson.getString("name");
+            }
+            if(jsonObject.has("status")){
+                course.status = jsonObject.getString("status");
+            }
+            if(jsonObject.has("seatsAvailable")){
+                course.seatsAvailable = jsonObject.getString("seatsAvailable");
             }
 
 

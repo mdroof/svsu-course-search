@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -104,6 +105,7 @@ public class BookListActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_book_list, menu);
         final MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setQueryHint("Course Number");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -115,12 +117,12 @@ public class BookListActivity extends ActionBarActivity {
                 searchView.setIconified(true);
                 searchItem.collapseActionView();
                 // Set activity title to search query
-                BookListActivity.this.setTitle(query);
+                BookListActivity.this.setTitle("Course Number: " + query);
                 return true;
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
+            public boolean onQueryTextChange(String query) {
                 return false;
             }
         });
