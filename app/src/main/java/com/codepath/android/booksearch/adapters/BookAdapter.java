@@ -49,7 +49,8 @@ public class BookAdapter extends ArrayAdapter<Course> {
         // Populate the data into the template view using the data object
         viewHolder.tvTitle.setText(course.getPrefix() + " " + course.getCourseNumber() + " - #" + course.getSection());
         viewHolder.tvAuthor.setText(course.getTitle());
-        Picasso.with(getContext()).load(Uri.parse(course.getCoverUrl())).error(R.drawable.ic_nocover).into(viewHolder.ivCover);
+        //Picasso.with(getContext()).load(Uri.parse(course.getCoverUrl())).error(R.drawable.ic_nocover).into(viewHolder.ivCover);
+        Picasso.with(getContext()).load(Uri.parse(course.getCoverUrl())).error(R.mipmap.ic_launcher).into(viewHolder.ivCover);
         // Return the completed view to render on screen
         return convertView;
     }
